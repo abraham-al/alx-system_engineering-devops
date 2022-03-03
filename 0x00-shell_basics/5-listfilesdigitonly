@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -glhSr
+ls -nha
