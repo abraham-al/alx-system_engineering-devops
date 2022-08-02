@@ -1,18 +1,23 @@
 #!/usr/bin/env bash
-# baah script Creates file /var/run/holbertonscript.pid containing its PID
-# Displays To infinity and beyond indefinitely
-# Displays I hate the kill command when receiving a SIGTERM signal
-# Displays Y U no love me?! when receiving a SIGINT signal
-# Deletes the file /var/run/holbertonscript.pid and terminates itself
-# when receiving a SIGQUIT or SIGTERM signal
-sudo bash -c "echo $$ > /var/run/holbertonscript.pid"
-trap 'echo "Y U no love me?!"' SIGINT
-trap "sudo rm -f /var/run/holbertonscript.pid; exit" SIGQUIT
-trap "sudo rm -f /var/run/holbertonscript.pid; echo I hate the kill command; exit" SIGTERM
+# Process and PID file
 
-while :
-do
-	echo "To infinity and beyond"
-	sleep 2
+file="/var/run/myscript.pid"
 
+if [ ! -e "$file" ]; then
+  touch "$file"
+fi
+
+sleep 2 &
+
+echo "$!" > "$file"
+
+# prints I hate the kill command, deletes the file and exits  when receiving a SIGTERM or SIGQUIT signal
+trap 'echo "I hate the kill command"; rm "$file"; exit' SIGTERM SIGQUIT
+
+# prints Y U no love me?! when receiving a SIGINT signal
+trap "echo Y U no love me?!" SIGINT
+
+while true; do
+  echo "To infinity and beyond"
+  sleep 2
 done
