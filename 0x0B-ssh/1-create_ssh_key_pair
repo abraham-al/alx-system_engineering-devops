@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Generate a ssh key pair
+ssh-keygen -b 4096 -f school -t rsa -P betty
+
