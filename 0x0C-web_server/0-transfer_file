@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Transfer file `file` to a server
 #scp /path/to/file username@a:/path/to/destination
 # Handcoded: scp -i ~/.ssh/id_rsa README.md ubuntu@34.75.10.160:/tmp
